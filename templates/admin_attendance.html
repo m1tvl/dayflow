@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>All Attendance Records</h2>
+<table>
+    <tr><th>User ID</th><th>Date</th><th>Check In</th><th>Check Out</th><th>Status</th></tr>
+    {% for r in records %}
+    <tr>
+        <td>{{ r.user_id }}</td>
+        <td>{{ r.date }}</td>
+        <td>{{ r.check_in or '-' }}</td>
+        <td>{{ r.check_out or '-' }}</td>
+        <td>{{ r.status }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<p><a href="{{ url_for('admin_dashboard') }}">Back</a></p>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Admin Dashboard</h2>
+<p>Pending leave requests: {{ pending_leaves }}</p>
+<div class="card-grid">
+    <a class="card" href="{{ url_for('admin_leaves') }}">Manage Leaves</a>
+    <a class="card" href="{{ url_for('admin_attendance') }}">View Attendance</a>
+    <a class="card" href="{{ url_for('logout') }}">Logout</a>
+</div>
+
+<h3>Employees</h3>
+<table>
+    <tr><th>Name</th><th>Employee ID</th><th>Email</th><th>Details</th></tr>
+    {% for e in employees %}
+    <tr>
+        <td>{{ e.name }}</td>
+        <td>{{ e.employee_id }}</td>
+        <td>{{ e.email }}</td>
+        <td><a href="{{ url_for('admin_view_employee', emp_id=e.id) }}">View</a></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

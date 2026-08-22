@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Leave Approvals</h2>
+<table>
+    <tr><th>User ID</th><th>Type</th><th>From</th><th>To</th><th>Status</th><th>Action</th></tr>
+    {% for l in leaves %}
+    <tr>
+        <td>{{ l.user_id }}</td>
+        <td>{{ l.leave_type }}</td>
+        <td>{{ l.start_date }}</td>
+        <td>{{ l.end_date }}</td>
+        <td>{{ l.status }}</td>
+        <td>
+            {% if l.status == 'Pending' %}
+            <form method="POST" style="display:inline">
+                <input type="hidden" name="leave_id" value="{{ l.id }}">
+                <input type="hidden" name="action" value="approve">
+                <button type="submit">Approve</button>
+            </form>
+            <form method="POST" style="display:inline">
+                <input type="hidden" name="leave_id" value="{{ l.id }}">
+                <input type="hidden" name="action" value="reject">
+                <button type="submit">Reject</button>
+            </form>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<p><a href="{{ url_for('admin_dashboard') }}">Back</a></p>
+{% endblock %}

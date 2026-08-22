@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Welcome, {{ user.name }}</h2>
+<div class="card-grid">
+    <a class="card" href="{{ url_for('employee_profile') }}">Profile</a>
+    <a class="card" href="{{ url_for('employee_attendance') }}">Attendance</a>
+    <a class="card" href="{{ url_for('employee_leave') }}">Leave Requests</a>
+    <a class="card" href="{{ url_for('logout') }}">Logout</a>
+</div>
+{% endblock %}

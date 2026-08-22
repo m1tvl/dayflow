@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="profile-header">
+    <div class="avatar">{{ employee.name[0] if employee.name else '?' }}</div>
+    <div class="header-main">
+        <h2>{{ employee.name }}</h2>
+        <p class="job-position">{{ employee.job_title or 'Job title not set' }}</p>
+        <p>{{ employee.email }}</p>
+        <p>{{ employee.phone or 'Mobile not set' }}</p>
+    </div>
+    <div class="header-org">
+        <p><strong>Company:</strong> {{ employee.company or '—' }}</p>
+        <p><strong>Department:</strong> {{ employee.department or '—' }}</p>
+        <p><strong>Manager:</strong> {{ employee.manager or '—' }}</p>
+        <p><strong>Location:</strong> {{ employee.location or '—' }}</p>
+    </div>
+</div>
+
+<div class="tabs">
+    <button class="tab-btn active" onclick="showTab('resume')">Resume</button>
+    <button class="tab-btn" onclick="showTab('private')">Private Info</button>
+    <button class="tab-btn" onclick="showTab('salary')">Salary Info</button>
+    {% if is_self %}
+    <button class="tab-btn" onclick="showTab('security')">Security</button>
+    {% endif %}
+</div>
+
+<div id="tab-resume" class="tab-content" style="display:block;">
+    <p><strong>Employee ID:</strong> {{ employee.employee_id }}</p>
+    <p><strong>Work Experience:</strong> {{ employee.work_experience or 'Not provided' }}</p>
+    <p><strong>Previous Company:</strong> {{ employee.previous_company or 'Not provided' }}</p>
+    <p><strong>Skills:</strong> {{ employee.skills or 'Not provided' }}</p>
+</div>
+
+<div id="tab-private" class="tab-content" style="display:none;">
+    <p><strong>Date of Birth:</strong> {{ employee.date_of_birth or 'Not provided' }}</p>
+    <p><strong>Residing Address:</strong> {{ employee.residing_address or 'Not provided' }}</p>
+    <p><strong>Nationality:</strong> {{ employee.nationality or 'Not provided' }}</p>
+    <p><strong>Personal Email:</strong> {{ employee.personal_email or 'Not provided' }}</p>
+    <p><strong>Gender:</strong> {{ employee.gender or 'Not provided' }}</p>
+    <p><strong>Marital Status:</strong> {{ employee.marital_status or 'Not provided' }}</p>
+    <p><strong>Date of Joining:</strong> {{ employee.date_of_joining or 'Not provided' }}</p>
+</div>
+
+<div id="tab-salary" class="tab-content" style="display:none;">
+    <p><strong>Salary:</strong> {{ employee.salary or '—' }} (read-only)</p>
+    <h3>Bank Details</h3>
+    <p><strong>Account Number:</strong> {{ employee.bank_account_number or 'Not provided' }}</p>
+    <p><strong>Bank Name:</strong> {{ employee.bank_name or 'Not provided' }}</p>
+    <p><strong>IFSC Code:</strong> {{ employee.ifsc_code or 'Not provided' }}</p>
+    <p><strong>PAN No:</strong> {{ employee.pan_no or 'Not provided' }}</p>
+    <p><strong>UAN No:</strong> {{ employee.uan_no or 'Not provided' }}</p>
+    <p><strong>Emp Code:</strong> {{ employee.employee_id }}</p>
+</div>
+
+{% if is_self %}
+<div id="tab-security" class="tab-content" style="display:none;">
+    <h3>Change Password</h3>
+    <form method="POST" action="{{ url_for('change_password') }}">
+        <input type="password" name="current_password" placeholder="Current Password" required>
+        <input type="password" name="new_password" placeholder="New Password (min 6 chars)" required>
+        <button type="submit">Update Password</button>
+    </form>
+</div>
+{% endif %}
+
+<p style="margin-top:20px;">
+    {% if is_self %}
+    <a href="{{ url_for('employee_dashboard') }}">Back</a>
+    {% else %}
+    <a href="{{ url_for('admin_dashboard') }}">Back</a>
+    {% endif %}
+</p>
+
+<script>
+function showTab(name) {
+    document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById('tab-' + name).style.display = 'block';
+    event.target.classList.add('active');
+}
+</script>
+{% endblock %}

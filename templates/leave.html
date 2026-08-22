@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Leave Requests</h2>
+
+<form method="POST">
+    <select name="leave_type">
+        <option value="Paid">Paid</option>
+        <option value="Sick">Sick</option>
+        <option value="Unpaid">Unpaid</option>
+    </select>
+    <input type="date" name="start_date" required>
+    <input type="date" name="end_date" required>
+    <input type="text" name="remarks" placeholder="Remarks (optional)">
+    <button type="submit">Apply</button>
+</form>
+
+<h3>Your Requests</h3>
+<table>
+    <tr><th>Type</th><th>From</th><th>To</th><th>Status</th></tr>
+    {% for l in leaves %}
+    <tr>
+        <td>{{ l.leave_type }}</td>
+        <td>{{ l.start_date }}</td>
+        <td>{{ l.end_date }}</td>
+        <td>{{ l.status }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<p><a href="{{ url_for('employee_dashboard') }}">Back</a></p>
+{% endblock %}
