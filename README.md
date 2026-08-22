@@ -49,7 +49,7 @@ dayflow-hrms/
 
 ## Team
 
-Shanmukha
-Roshith
-Nihal M
+Shanmukha,
+Roshith,
+Nihal M,
 Mitul
