@@ -2,7 +2,7 @@
 
 Every workday, perfectly aligned.
 
-A lightweight HRMS built for [Hackathon Name] that digitizes core HR operations: authentication, role-based dashboards, attendance tracking, leave management, and payroll visibility.
+A lightweight HRMS built for Odoo X NMIT Hackathon that digitizes core HR operations: authentication, role-based dashboards, attendance tracking, leave management, and payroll visibility.
 
 ## Features Implemented
 
@@ -49,4 +49,7 @@ dayflow-hrms/
 
 ## Team
 
-[Add your team member names here]
+Shanmukha
+Roshith
+Nihal M
+Mitul
